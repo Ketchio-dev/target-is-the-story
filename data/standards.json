@@ -1,0 +1,473 @@
+{
+ "rows": [
+  {
+   "source": "std_2012",
+   "tribunal": "CFSRB",
+   "sentence": "Emergency Secure Treatment applications will be scheduled for a hearing within four calendar days.",
+   "durations": [
+    {
+     "as_written": "four calendar days",
+     "days": 4.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "CFSRB",
+   "sentence": "Section 68 applications will be scheduled for a pre-hearing within 14 calendar days.",
+   "durations": [
+    {
+     "as_written": "14 calendar days",
+     "days": 14.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "CFSRB",
+   "sentence": "Section 61 and 144 applications will be scheduled within 20 calendar days after the application has been deemed eligible.",
+   "durations": [
+    {
+     "as_written": "20 calendar days",
+     "days": 20.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "CFSRB",
+   "sentence": "All other applications will be scheduled for a hearing within 20 calendar days after receipt of the application.",
+   "durations": [
+    {
+     "as_written": "20 calendar days",
+     "days": 20.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "CFSRB",
+   "sentence": "Decisions for Emergency Secure Treatment applications will be issued at the conclusion of the hearing. Reasons for the decision will be issued within 10 calendar days.",
+   "durations": [
+    {
+     "as_written": "10 calendar days",
+     "days": 10.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "CFSRB",
+   "sentence": "Decisions or Orders for all other applications will be issued within 10 calendar days after the hearing has been completed.",
+   "durations": [
+    {
+     "as_written": "10 calendar days",
+     "days": 10.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "CRB",
+   "sentence": "Recommendations for all applications will be issued within 30 calendar days.",
+   "durations": [
+    {
+     "as_written": "30 calendar days",
+     "days": 30.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "HRTO",
+   "sentence": "The first hearing date offered to parties will be scheduled to take place within 180 calendar days from the date the application is ready to proceed to hearing.",
+   "durations": [
+    {
+     "as_written": "180 calendar days",
+     "days": 180.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "HRTO",
+   "sentence": "The first mediation date offered to parties will be scheduled to take place within 150 calendar days from the date the parties agree to mediation.",
+   "durations": [
+    {
+     "as_written": "150 calendar days",
+     "days": 150.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "HRTO",
+   "sentence": "Decisions for hearings which take three days or less will be issued within 90 calendar days.",
+   "durations": [
+    {
+     "as_written": "90 calendar days",
+     "days": 90.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "HRTO",
+   "sentence": "Decisions for hearings which take longer than three days will be issued within 180 calendar days.",
+   "durations": [
+    {
+     "as_written": "180 calendar days",
+     "days": 180.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "LTB",
+   "sentence": "All applications, except those dealing with an above guideline increase (AGIs and A4s), will have a hearing scheduled within 30 calendar days.",
+   "durations": [
+    {
+     "as_written": "30 calendar days",
+     "days": 30.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "LTB",
+   "sentence": "Orders for all applications, except those dealing with an above guideline increase (AGIs) and an application to vary the amount of the reduction (A4s) will be issued within seven calendar days.",
+   "durations": [
+    {
+     "as_written": "seven calendar days",
+     "days": 7.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "OSETS",
+   "sentence": "All applications will be scheduled for mediation or a hearing within 120 calendar days.",
+   "durations": [
+    {
+     "as_written": "120 calendar days",
+     "days": 120.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "OSETS",
+   "sentence": "Decisions will be issued within 90 calendar days",
+   "durations": [
+    {
+     "as_written": "90 calendar days",
+     "days": 90.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "SBT",
+   "sentence": "Appeals will be scheduled with a notice of hearing sent out no later than 30 calendar days after receipt of the appeal that sets a hearing date 180 calendar days after the notice of hearing.",
+   "durations": [
+    {
+     "as_written": "30 calendar days",
+     "days": 30.0
+    },
+    {
+     "as_written": "180 calendar days",
+     "days": 180.0
+    }
+   ]
+  },
+  {
+   "source": "std_2012",
+   "tribunal": "SBT",
+   "sentence": "Decisions will be issued within 30 calendar days.",
+   "durations": [
+    {
+     "as_written": "30 calendar days",
+     "days": 30.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CFSRB",
+   "sentence": "Section 36 hearings will be scheduled within 20 calendar days of receipt of the application.",
+   "durations": [
+    {
+     "as_written": "20 calendar days",
+     "days": 20.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CFSRB",
+   "sentence": "Section 68 pre-hearing conferences will be scheduled within 40 calendar days after the application is deemed eligible.",
+   "durations": [
+    {
+     "as_written": "40 calendar days",
+     "days": 40.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CFSRB",
+   "sentence": "Section 68 hearings will be scheduled within 60 calendar days after the application is deemed eligible.",
+   "durations": [
+    {
+     "as_written": "60 calendar days",
+     "days": 60.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CFSRB",
+   "sentence": "Section 61 and 144 hearings will be scheduled within 20 calendar days after the application is deemed eligible.",
+   "durations": [
+    {
+     "as_written": "20 calendar days",
+     "days": 20.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CFSRB",
+   "sentence": "Section 124 hearings will be scheduled within four calendar days of receipt of the application.",
+   "durations": [
+    {
+     "as_written": "four calendar days",
+     "days": 4.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CFSRB",
+   "sentence": "Section 68 decisions or orders will be issued within 30 calendar days of the completion of the hearing",
+   "durations": [
+    {
+     "as_written": "30 calendar days",
+     "days": 30.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CFSRB",
+   "sentence": "Decisions or Orders for all other CFSA applications will be issued within 10 calendar days after the hearing has been completed.",
+   "durations": [
+    {
+     "as_written": "10 calendar days",
+     "days": 10.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CFSRB",
+   "sentence": "Appeals of school board expulsion decisions will be scheduled within 30 calendar days of receipt of the notice of appeal.",
+   "durations": [
+    {
+     "as_written": "30 calendar days",
+     "days": 30.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CFSRB",
+   "sentence": "Orders will be issued within 10 calendar days after the hearing has been completed.",
+   "durations": [
+    {
+     "as_written": "10 calendar days",
+     "days": 10.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CFSRB",
+   "sentence": "Decisions will be issued within 30 calendar days after the hearing has been completed.",
+   "durations": [
+    {
+     "as_written": "30 calendar days",
+     "days": 30.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CRB",
+   "sentence": "Where the Board intends to hold a hearing it will advise the young person within 10 calendar days of receipt of the application.",
+   "durations": [
+    {
+     "as_written": "10 calendar days",
+     "days": 10.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "CRB",
+   "sentence": "Recommendations will be issued within 30 calendar days of receipt of the application.",
+   "durations": [
+    {
+     "as_written": "30 calendar days",
+     "days": 30.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "HRTO",
+   "sentence": "The first hearing date offered to parties will be scheduled to take place within 180 calendar days from the date the application is ready to proceed to hearing.",
+   "durations": [
+    {
+     "as_written": "180 calendar days",
+     "days": 180.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "HRTO",
+   "sentence": "The first mediation date offered to parties will be scheduled to take place within 150 calendar days from the date the parties agree to mediation.",
+   "durations": [
+    {
+     "as_written": "150 calendar days",
+     "days": 150.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "HRTO",
+   "sentence": "Decisions for hearings which take three days or less will be issued within 90 calendar days.",
+   "durations": [
+    {
+     "as_written": "90 calendar days",
+     "days": 90.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "HRTO",
+   "sentence": "Decisions for hearings which take longer than three days will be issued within 180 calendar days.",
+   "durations": [
+    {
+     "as_written": "180 calendar days",
+     "days": 180.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "LTB",
+   "sentence": "All applications, except those dealing with an above guideline increase (AGIs and A4s), will have a hearing scheduled within 25 business days.",
+   "durations": [
+    {
+     "as_written": "25 business days",
+     "days": 35.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "LTB",
+   "sentence": "Orders for all applications, except those dealing with an above guideline increase (AGIs) and an application to vary the amount of the reduction (A4s) will be issued within 5 business days.",
+   "durations": [
+    {
+     "as_written": "5 business days",
+     "days": 7.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "OSETS",
+   "sentence": "All applications will be scheduled for mediation or a hearing within 120 calendar days.",
+   "durations": [
+    {
+     "as_written": "120 calendar days",
+     "days": 120.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "OSETS",
+   "sentence": "Decisions will be issued within 90 calendar days",
+   "durations": [
+    {
+     "as_written": "90 calendar days",
+     "days": 90.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "SBT",
+   "sentence": "Appeals will be scheduled with a notice of hearing sent out no later than 30 calendar days after receipt of the appeal that sets a hearing date 180 calendar days after the notice of hearing.",
+   "durations": [
+    {
+     "as_written": "30 calendar days",
+     "days": 30.0
+    },
+    {
+     "as_written": "180 calendar days",
+     "days": 180.0
+    }
+   ]
+  },
+  {
+   "source": "std_2013",
+   "tribunal": "SBT",
+   "sentence": "Decisions will be issued within 30 calendar days.",
+   "durations": [
+    {
+     "as_written": "30 calendar days",
+     "days": 30.0
+    }
+   ]
+  }
+ ],
+ "provenance": {
+  "ar_2024_25": {
+   "url": "https://tribunalsontario.ca/documents/TO/Tribunals_Ontario_2024-2025_Annual_Report.html",
+   "bytes": 506740,
+   "last_modified": "",
+   "fetched_at": "2026-09-16T21:12:08Z"
+  },
+  "ar_2023_24": {
+   "url": "https://tribunalsontario.ca/documents/TO/Tribunals_Ontario_2023-2024_Annual_Report.html",
+   "bytes": 446172,
+   "last_modified": "",
+   "fetched_at": "2026-09-16T21:12:08Z"
+  },
+  "ar_2022_23": {
+   "url": "https://tribunalsontario.ca/documents/TO/Tribunals_Ontario_2022-2023_Annual_Report.html",
+   "bytes": 384476,
+   "last_modified": "",
+   "fetched_at": "2026-09-16T21:12:09Z"
+  },
+  "std_2013": {
+   "url": "https://tribunalsontario.ca/documents/sjto/Service%20Standards%20effective%20September%201%202013.html",
+   "bytes": 7704,
+   "last_modified": "",
+   "fetched_at": "2026-09-16T21:28:42Z"
+  },
+  "std_2012": {
+   "url": "https://tribunalsontario.ca/documents/sjto/Service%20Standards%20effective%20April%201%202012.html",
+   "bytes": 6952,
+   "last_modified": "",
+   "fetched_at": "2026-09-16T21:28:42Z"
+  }
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "ar_2024_25": {
+  "url": "https://tribunalsontario.ca/documents/TO/Tribunals_Ontario_2024-2025_Annual_Report.html",
+  "bytes": 506740,
+  "last_modified": "",
+  "fetched_at": "2026-09-16T21:12:08Z"
+ },
+ "ar_2023_24": {
+  "url": "https://tribunalsontario.ca/documents/TO/Tribunals_Ontario_2023-2024_Annual_Report.html",
+  "bytes": 446172,
+  "last_modified": "",
+  "fetched_at": "2026-09-16T21:12:08Z"
+ },
+ "ar_2022_23": {
+  "url": "https://tribunalsontario.ca/documents/TO/Tribunals_Ontario_2022-2023_Annual_Report.html",
+  "bytes": 384476,
+  "last_modified": "",
+  "fetched_at": "2026-09-16T21:12:09Z"
+ },
+ "std_2013": {
+  "url": "https://tribunalsontario.ca/documents/sjto/Service%20Standards%20effective%20September%201%202013.html",
+  "bytes": 7704,
+  "last_modified": "",
+  "fetched_at": "2026-09-16T21:28:42Z"
+ },
+ "std_2012": {
+  "url": "https://tribunalsontario.ca/documents/sjto/Service%20Standards%20effective%20April%201%202012.html",
+  "bytes": 6952,
+  "last_modified": "",
+  "fetched_at": "2026-09-16T21:28:42Z"
+ }
+}
