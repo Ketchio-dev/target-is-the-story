@@ -1,35 +1,48 @@
 # Devpost body — The Target Is the Story
 
-> **읽는 사람에게 (제출 전에 지워라).**
->
-> **Inspiration 은 비어 있다. 일부러 비웠다.** 나머지는 전부 대신 썼지만, 왜 이걸
-> 만들었는지는 겪은 사람만 안다. 아래 "Inspiration" 절에 물음 세 개를 남겼다. 답이 곧 문단이다.
->
-> 본문의 **모든 수치는 `src/check.py` 가 `analyze.py` 출력과 대조해 통과시킨 것**이다
-> (28/28). 손으로 고치면 검사가 먼저 빨개진다. 고칠 일이 있으면 숫자가 아니라 코드를 고쳐라.
->
-> tagline 은 셋을 뒀다. 하나 고르고 나머지는 지워라.
 
----
+## Tagline
 
-## Tagline (택 1)
+> **Two tribunals both report 100 % compliance. One promises 24 hours, the other 240 days.**
 
-- **A.** Two tribunals both report 100 % compliance. One promises 24 hours, the other 240 days.
-- **B.** Ontario's tribunals met their targets 92 % of the time. The targets are the story.
-- **C.** A compliance percentage tells you the target was met. It never tells you what the target was.
+It is the project in one line, both halves are published by Tribunals Ontario, and a
+non-lawyer gets it without a footnote. Two others were drafted:
 
----
+- *Ontario's tribunals met their targets 92 % of the time. The targets are the story.* Needs the
+  reader to already know what 92 % refers to.
+- *A compliance percentage tells you the target was met. It never tells you what the target was.*
+  True and general, which is exactly why it is weaker as a tile: nothing to check.
+
 
 ## Inspiration
 
-*(사람이 쓴다. 지어내지 않았다.)*
+I have never waited on a tribunal. No hearing, no appeal, nothing that put me on the other side
+of one of these numbers. I want to say that first, because the honest version of how this
+started is that I was reading a table.
 
-세 가지만 답하면 문단이 된다:
+Tribunals Ontario publishes an annual report, and in it there is a figure: 92 % of the time, it
+met its scheduling standard. That reads like a system working. I had no reason to doubt it and I
+still do not. It is correctly computed.
 
-1. 행정 심판·민원·보험 심사처럼 **"처리 기한"이 걸린 절차를 기다려 본 적**이 있는가?
-   있었다면 그때 기다린 실제 날수는 얼마였나.
-2. 그 기관이 발표하는 "기한 준수율"을 본 적이 있는가? 봤을 때 무슨 생각이 들었나.
-3. 없다면 — 이 데이터를 왜 열어 봤나. 뉴스였나, 수업이었나, 누가 물어봤나.
+What made me keep going was sorting. The report lists each tribunal's standard in the order the
+tribunals happen to appear. I sorted them by how long they permit instead, which took about a
+minute, and the top and the bottom of that list ended up next to each other on my screen. The
+Custody Review Board promises a first telephone review within 24 hours. The Social Benefits
+Tribunal promises a first hearing within 240 days. Both reported meeting their standard 100 % of
+the time.
+
+Nothing was hidden. Both rows were already in the report, a few pages apart, and the arithmetic
+between them is 240. Putting them side by side is the whole trick, and it took a sort.
+
+Then it got worse in a way I did not expect. I went looking for what the 92 % averages, found
+the footnote saying it is weighted evenly across tribunals rather than across cases, and
+recomputed it that way. The Landlord and Tenant Board reports 77 % on 69,228 cases in the same
+document, which is nearly four times the roll-up's entire denominator, and it does not report
+that KPI at all. So the headline average is an average with the busiest place left out, by a
+rule the report states plainly and I had simply never read.
+
+The thing I keep coming back to is that none of this required getting anything out of anyone. It
+required reading the footnote and doing the sort.
 
 ## What it does
 
