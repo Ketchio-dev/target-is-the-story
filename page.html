@@ -1,0 +1,186 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>The Target Is The Story — what a tribunal's "% met target" actually measures</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- 템플릿. 분석 수치가 하나도 없다. src/export_web.py 가 주입해 index.html 을 만든다. -->
+<style>
+ :root{--ink:#111;--paper:#fff;--muted:#6b7280;--line:#e5e7eb;--bad:#b91c1c;--good:#15803d;--warn:#b45309;--bar:#cbd5e1;--barhot:#b91c1c}
+ *{box-sizing:border-box}
+ body{margin:0;font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--paper)}
+ main{max-width:1020px;margin:0 auto;padding:28px 18px 80px}
+ h1{font-size:29px;line-height:1.2;letter-spacing:-.4px;margin:0 0 6px}
+ h2{font-size:19px;margin:28px 0 10px}
+ .sub{color:var(--muted);margin:0 0 18px}
+ .card{border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+ .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+ .tabs button{font:inherit;padding:7px 14px;border:1px solid var(--line);background:#fff;border-radius:99px;cursor:pointer}
+ .tabs button[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+ .lad{display:grid;grid-template-columns:70px minmax(0,1fr) 108px;gap:6px 12px;align-items:center;font-variant-numeric:tabular-nums}
+ .lad .t{font-weight:600}
+ .lad .b{height:24px;min-width:3px;background:var(--bar);border-radius:4px;position:relative;cursor:pointer}
+ .lad .b.hot{background:var(--barhot)}
+ .lad .b span{position:absolute;left:8px;top:2px;font-size:12px;color:#fff;font-weight:700}
+ .lad .b.lo span{color:var(--ink);left:calc(100% + 8px);white-space:nowrap;font-weight:600}
+ .lad .n{font-size:12.5px;color:var(--muted);text-align:right}
+ table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:14px}
+ th,td{text-align:right;padding:5px 8px;border-bottom:1px solid var(--line)}
+ th:first-child,td:first-child{text-align:left}
+ th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+ .against{border-left:4px solid var(--warn);background:#fffbeb;padding:12px 15px;border-radius:0 8px 8px 0;margin:8px 0;font-size:14px}
+ .against b{color:var(--warn)}
+ .quote{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:#f8fafc;border-left:3px solid var(--line);padding:8px 12px;margin:6px 0;white-space:pre-wrap}
+ .clock{background:#fef3c7;padding:0 3px;border-radius:3px}
+ .muted{color:var(--muted)}
+ footer{color:var(--muted);font-size:12.5px;margin-top:28px;border-top:1px solid var(--line);padding-top:14px}
+ code{background:#f3f4f6;padding:1px 5px;border-radius:4px;font-size:12.5px}
+ .big{font-size:38px;font-weight:800;letter-spacing:-1px;line-height:1}
+ [hidden]{display:none!important}
+</style>
+<main>
+ <h1 id="h1"></h1>
+ <p class="sub" id="lede"></p>
+
+ <div class="against" id="nothing-new"></div>
+
+ <div class="tabs" role="tablist">
+  <button role="tab" data-t="ladder" aria-selected="true">What the percentage permits</button>
+  <button role="tab" data-t="rollup" aria-selected="false">How the headline is averaged</button>
+  <button role="tab" data-t="drift" aria-selected="false">What the target used to be</button>
+ </div>
+
+ <section id="p-ladder">
+  <div class="card">
+   <div class="lad" id="ladder"></div>
+   <div class="muted" style="margin-top:12px">Click a bar for the standard as published, with the clock-start highlighted.</div>
+  </div>
+  <div class="card" id="detail"></div>
+  <div class="card">
+   <h2 id="zero-h"></h2>
+   <table><thead><tr><th>tribunal</th><th>reported</th><th>standard</th></tr></thead><tbody id="zeros"></tbody></table>
+  </div>
+ </section>
+
+ <section id="p-rollup" hidden>
+  <div class="card" id="rollup"></div>
+  <div class="card">
+   <h2>The rows that feed it</h2>
+   <table><thead><tr><th>tribunal</th><th>met</th><th>cases</th><th>standard</th></tr></thead><tbody id="comp"></tbody></table>
+  </div>
+ </section>
+
+ <section id="p-drift" hidden>
+  <div class="card" id="drift"></div>
+ </section>
+
+ <div id="against"></div>
+ <footer id="prov"></footer>
+</main>
+
+<script>
+/*DATA_START*/
+const DATA = null;
+/*DATA_END*/
+const $ = (id) => document.getElementById(id);
+const L = DATA.ladder, R = DATA.rollup, F = DATA.full_names;
+let sel = 0;
+
+const fast = L.filter((r) => r.pct === 100).sort((a, b) => a.d - b.d)[0];
+const slow = L.filter((r) => r.pct === 100).sort((a, b) => b.d - a.d)[0];
+const ratio = Math.round(slow.d / fast.d);
+
+$("h1").textContent = `${fast.w} and ${slow.w}. Both reported as meeting the target 100 % of the time.`;
+$("lede").textContent =
+  `Tribunals Ontario publishes how often each of its thirteen tribunals meets its own service standard. `
+  + `The percentage is high almost everywhere. This page sorts those standards by how long they permit, `
+  + `recomputes the headline average the way the report's own footnote describes, and puts the 2012 targets beside today's.`;
+$("nothing-new").innerHTML = `<b>We uncovered nothing.</b><br>${DATA.against.nothing_new}`;
+
+const maxd = Math.max(...L.map((r) => r.d));
+$("ladder").innerHTML = L.map((r, i) => {
+  const w = Math.max(2, (r.d / maxd) * 100);
+  const lo = w < 34;
+  const pct = r.pct === null ? "N/A" : `${r.pct.toFixed(0)} %`;
+  return `<div class="t">${r.t}</div>`
+    + `<div class="b ${r.t === slow.t && r.d === slow.d ? "hot" : ""} ${lo ? "lo" : ""}" `
+    + `style="width:${w.toFixed(1)}%" data-i="${i}">`
+    + `<span>${r.w} · met ${pct}</span></div>`
+    + `<div class="n">${r.n === null ? "no cases" : r.n.toLocaleString() + " cases"}${r.zero ? " ⚠" : ""}</div>`;
+}).join("");
+[...$("ladder").querySelectorAll(".b")].forEach((b) =>
+  b.addEventListener("click", () => { sel = Number(b.dataset.i); detail(); }));
+
+function detail() {
+  const r = L[sel];
+  const s = r.c ? r.s.replace(r.c, `<span class="clock">${r.c}</span>`) : r.s;
+  $("detail").innerHTML =
+    `<h2>${F[r.t] || r.t}</h2>`
+  + `<div class="quote">${s}</div>`
+  + `<div class="muted">Permitted: <b>${r.w}</b>${r.w.includes("calendar") ? "" : ` (${r.d.toFixed(0)} calendar day${r.d === 1 ? "" : "s"} as we converted it)`} · `
+  + `target ${r.target === null ? "—" : r.target.toFixed(0) + " %"} · `
+  + `reported ${r.pct === null ? "N/A" : r.pct.toFixed(0) + " %"} on ${r.n === null ? "no" : r.n.toLocaleString()} cases</div>`
+  + (r.c ? `<div class="muted" style="margin-top:6px">The clock starts <b>${r.c}</b>. Tribunals in this table use ${new Set(L.map((x) => x.c).filter(Boolean)).size} different starting points, so two identical percentages can be counting from different days.</div>` : "");
+}
+detail();
+
+// "N/A" 는 0 이 아니다. 둘을 합쳐 세는 것은 이 페이지가 지적하려는 바로 그 잘못이다.
+$("zero-h").textContent =
+  `${DATA.zero_rows.length} row${DATA.zero_rows.length === 1 ? " reports" : "s report"} a percentage on no cases. `
+  + `${DATA.not_reported_rows.length} more carr${DATA.not_reported_rows.length === 1 ? "ies" : "y"} a target with no result at all.`;
+$("zeros").innerHTML =
+  DATA.zero_rows.map((r) =>
+    `<tr><td>${r.t}</td><td><b>${r.raw || "0 %"}</b> of 0</td><td class="muted">${r.s}</td></tr>`).join("")
+  + DATA.not_reported_rows.map((r) =>
+    `<tr><td>${r.t}</td><td class="muted">${r.raw}</td><td class="muted">${r.s}</td></tr>`).join("");
+
+$("rollup").innerHTML =
+  `<h2>The headline</h2>`
++ `<div class="big">${R.reported_pct === null ? "—" : R.reported_pct.toFixed(0) + " %"}</div>`
++ `<div class="muted">as published, on ${R.reported_n === null ? "—" : R.reported_n.toLocaleString()} cases</div>`
++ `<div class="quote">${R.footnote}</div>`
++ `<table style="margin-top:12px"><tbody>`
++ `<tr><td>evenly weighted across tribunals, the way the footnote describes</td><td><b>${R.even.toFixed(1)} %</b></td></tr>`
++ `<tr><td>the same rows, weighted by the cases each tribunal reported</td><td><b>${R.weighted.toFixed(1)} %</b></td></tr>`
++ `<tr><td>difference</td><td><b>${R.diff.toFixed(1)} pp</b></td></tr>`
++ `</tbody></table>`
++ `<div class="muted" style="margin-top:10px">Our reconstruction sums to ${R.reconstructed_n.toLocaleString()} cases against the published ${R.reported_n === null ? "—" : R.reported_n.toLocaleString()} `
++ `— a residual of ${(R.reconstructed_n - (R.reported_n || 0)).toLocaleString()}, because the report does not say which rows it averages. We print the residual rather than round it away.</div>`
++ `<div class="muted" style="margin-top:6px">Other roll-ups in the same table: `
++ R.all_rollups.map((r) => `${r.p === null ? "—" : r.p.toFixed(0)} % on ${r.n === null ? "—" : r.n.toLocaleString()}`).join(" · ") + `.</div>`;
+
+$("comp").innerHTML = R.components.sort((a, b) => (b.n || 0) - (a.n || 0)).map((r) =>
+  `<tr><td>${r.t}</td><td>${r.p.toFixed(0)} %</td><td>${(r.n || 0).toLocaleString()}</td><td class="muted">${r.s}</td></tr>`).join("");
+
+// 드리프트는 export_web.py 가 계산해 싣는다. 화면은 표시만 한다 —
+// 그리고 시계 시작점이 바뀐 비교는 **화면이 직접** "직접 비교 불가"라고 말한다.
+$("drift").innerHTML = `<h2>The same tribunal's standard, thirteen years apart</h2>`
++ `<div class="muted">${DATA.against.sjto_only}</div>`
++ `<table style="margin-top:14px"><thead><tr><th>tribunal</th><th>then</th><th>now</th><th>change</th><th></th></tr></thead><tbody>`
++ DATA.drift.map((d) =>
+    `<tr><td>${F[d.t] || d.t}</td><td>${d.then_days.toFixed(0)} days</td>`
+  + `<td>${d.now_days.toFixed(0)} days</td>`
+  + `<td><b>${d.delta === 0 ? "unchanged" : (d.delta > 0 ? "+" : "") + d.delta.toFixed(0) + " days"}</b></td>`
+  + `<td class="muted">${d.clock_changed ? "the clock start also changed — not directly comparable" : ""}</td></tr>`).join("")
++ `</tbody></table>`
++ DATA.drift.map((d) => {
+    const years = Object.keys(d.then).sort();
+    return `<h2 style="margin-top:22px">${F[d.t] || d.t}</h2>`
+      + years.map((y) => `<div class="quote">${y} — ${d.then[y].sentence}</div>`).join("")
+      + `<div class="quote">2024-25 — ${d.now_s}</div>`
+      + (d.clock_changed
+          ? `<div class="against"><b>The clock start changed.</b> Then: “${d.then_clock}”. Now: “${d.now_clock}”. `
+            + `These two day counts measure different intervals, so we do not treat the difference as a like-for-like change.</div>`
+          : `<div class="muted">Clock start unchanged: “${d.now_clock}”.</div>`)
+      + `<div class="muted">Reported ${d.now_pct === null ? "N/A" : d.now_pct.toFixed(0) + " %"} on ${(d.now_n || 0).toLocaleString()} cases.</div>`;
+  }).join("");
+
+$("against").innerHTML = ["not_slow", "converted", "not_advice"]
+  .map((k) => `<div class="against">${DATA.against[k]}</div>`).join("");
+$("prov").innerHTML = `Sources, all static HTML on tribunalsontario.ca, no key and no account: `
+  + Object.entries(DATA.provenance).map(([n, s]) => `<code>${n}</code> ${(s.bytes / 1024).toFixed(0)} KB`).join(" · ")
+  + `. Every number on this page was written by <code>src/export_web.py</code> from parser output; none typed by hand.`;
+
+[...document.querySelectorAll('[role=tab]')].forEach((b) => b.addEventListener("click", () => {
+  [...document.querySelectorAll('[role=tab]')].forEach((x) => x.setAttribute("aria-selected", String(x === b)));
+  for (const t of ["ladder", "rollup", "drift"]) $("p-" + t).hidden = (t !== b.dataset.t);
+}));
+</script>
