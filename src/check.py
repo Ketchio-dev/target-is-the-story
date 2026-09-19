@@ -48,6 +48,9 @@ NAMES = [
     "제출 본문(devpost.md)의 수치가 출력과 일치한다",
     "화면 사다리가 분석과 같은 행 수·같은 시계 시작점 가짓수를 쓴다",
     "첫 심리 판정 규칙이 한 벌이다(제 사본을 둔 파일이 없다)",
+    "어느 문서도 검사·사보타주 개수를 틀리게 적지 않았다",
+    "화면의 롤업 수치가 analyze 출력과 전부 일치한다",
+    "사다리 그림이 모든 행을 담고 있다(아래가 잘리지 않았다)",
 ]
 result = {n: (False, "실행되지 않음") for n in NAMES}
 assert len(NAMES) == len(set(NAMES)), "검사 이름이 중복된다"
@@ -397,6 +400,99 @@ for _f in sorted(_glob.glob(os.path.join(ROOT, "src", "*.py"))):
     if re.search(r"proceeds?\s*\\?s?\+?\\?s\*to|proceeds to a first|hearings\?? scheduled within", _t):
         _dup.append(f"{_b} 가 첫 심리 규칙을 직접 적고 있다")
 ok(NAME("첫 심리 판정 규칙이 한 벌이다(제 사본을 둔 파일이 없다)"), not _dup, "; ".join(_dup[:3]))
+
+# **README 만 묶으면 나머지가 샌다.** 제출 본문·AI 고지·체크리스트가 전부 옛 수를 들고 있었고,
+# 심사위원이 읽는 건 그쪽이다. 개수를 적은 문서를 **전부** 훑어 코드와 대조한다.
+import glob as _g9
+_cnt_bad = []
+_docs9 = ([os.path.join(ROOT, f) for f in ("README.md", "VERIFICATION.md")]
+          + sorted(_g9.glob(os.path.join(ROOT, "submission", "*.md")))
+          + sorted(_g9.glob(os.path.join(ROOT, "submission", "*.html"))))
+_N_CHK, _N_SAB = len(NAMES), n_sabs
+_pats9 = [
+    (r"(\d+)\s*checks?,? (?:at a|whose|on the|run on)", _N_CHK, "검사"),
+    (r"check\.py[^\n]*?#\s*(\d+)\s*checks", _N_CHK, "검사"),
+    (r"check\.py[^\n]*?(\d+)\s*checks", _N_CHK, "검사"),
+    (r"`check\.py` \((\d+) checks\)", _N_CHK, "검사"),
+    (r"→ \*\*(\d+)/\d+\*\*", _N_CHK, "검사"),
+    (r"(\d+) checks at a fixed denominator", _N_CHK, "검사"),
+    (r"(\d+)\s*(?:planted|deliberate) defects", _N_SAB, "사보타주"),
+    (r"breaks? (\d+) things", _N_SAB, "사보타주"),
+    (r"break (\d+) things", _N_SAB, "사보타주"),
+    (r"Current: (\d+) of \d+ caught", _N_SAB, "사보타주"),
+    (r"\*\*(\d+)/\d+ 검출", _N_SAB, "사보타주"),
+]
+for _f9 in _docs9:
+    if not os.path.exists(_f9):
+        continue
+    _t9 = open(_f9, encoding="utf-8").read()
+    for _p9, _w9, _k9 in _pats9:
+        if _w9 is None:
+            continue
+        for _m9 in re.finditer(_p9, _t9):
+            if int(_m9.group(1)) != _w9:
+                _cnt_bad.append(f"{os.path.basename(_f9)}: {_k9} {_m9.group(1)} (실제 {_w9})")
+_cnt_bad = sorted(set(_cnt_bad))
+ok(NAME("어느 문서도 검사·사보타주 개수를 틀리게 적지 않았다"), not _cnt_bad, "; ".join(_cnt_bad[:4]))
+
+# **화면의 롤업 수치를 아무도 안 보고 있었다.** `export_web.py` 안에서 `tot` 이라는 이름이
+# 두 번 쓰여, 재구성 건수 합(17,707)이 드리프트 루프의 **일수 합(210)** 으로 덮여 있었다.
+# 페이지는 "재구성 210건"을 싣고 README 는 17,707 을 말하는 상태로 검사 31개가 전부 초록이었다.
+_rb = []
+try:
+    _idx2 = open(IDX, encoding="utf-8").read() if os.path.exists(IDX) else ""
+    _m2 = re.search(r"const DATA = (\{.*?\});", _idx2, re.S)
+    _R2 = (json.loads(_m2.group(1)).get("rollup") or {}) if _m2 else {}
+except Exception as _e:
+    _R2 = {}; _rb.append(f"index.html 에서 롤업을 못 읽었다: {_e}")
+for _label, _pat, _key, _tol in (
+    ("보고 퍼센트", r"보고서: ([\d.]+) %", "reported_pct", 0.05),
+    ("보고 분모",   r"보고서: [\d.]+ %\s*\(n=([\d,]+)\)", "reported_n", 0.5),
+    ("고르게 평균", r"고르게 평균\(각주 방법, \d+곳\)\s+([\d.]+) %", "even", 0.05),
+    ("가중 평균",   r"건수로 가중.*?([\d.]+) %\s+차이", "weighted", 0.05),
+    ("재구성 합",   r"재구성한 건수 합 ([\d,]+) vs", "reconstructed_n", 0.5),
+):
+    _a2 = one(_pat, out, re.S)
+    if not _a2:
+        _rb.append(f"{_label}: analyze 출력에서 못 읽었다"); continue
+    _want = float(_a2[0].replace(",", ""))
+    _got = _R2.get(_key)
+    if _got is None:
+        _rb.append(f"{_label}: 화면에 {_key} 가 없다")
+    elif abs(float(_got) - _want) > _tol:
+        _rb.append(f"{_label}: 출력 {_want:g} vs 화면 {float(_got):g}")
+ok(NAME("화면의 롤업 수치가 analyze 출력과 전부 일치한다"), not _rb, "; ".join(_rb[:3]))
+
+# **그림이 아래에서 잘려 헤드라인 행이 빠져 있었다.** 사다리를 17행에서 20행으로 늘렸는데
+# 스크린샷 높이가 900px 에 박혀 있어, 영상이 "허용된 시간 순으로 전부"라고 말하는 동안
+# 화면에는 240일 행(이 프로젝트의 헤드라인)이 없었다. 행 수에 맞는 높이인지 본다.
+_fb = []
+_lad_png = os.path.join(ROOT, "figures", "01-ladder.png")
+if not os.path.exists(_lad_png):
+    _fb.append("figures/01-ladder.png 이 없다 — python3 src/shots.py")
+else:
+    import struct as _st
+    with open(_lad_png, "rb") as _f:
+        _hdr = _f.read(32)
+    _w, _h = _st.unpack(">II", _hdr[16:24])
+    _n_rows = len(_LAD) if _LAD else 0
+    _need = _n_rows * 28 + 60          # 행당 최소 28px + 머리말·여백
+    if _n_rows == 0:
+        _fb.append("사다리 행 수를 못 읽었다")
+    elif _h < _need:
+        _fb.append(f"그림 높이 {_h}px 인데 {_n_rows}행이면 최소 {_need}px 필요 — 아래가 잘렸다")
+    else:
+        # **PNG 만 보면 안 된다.** 사보타주로 shots.py 의 높이를 되돌려도 그림을 다시 찍지
+        # 않으니 검사가 초록이었다("놓침"). 찍는 쪽 여유도 같이 본다 —
+        # `TALL` 은 넉넉히 찍고 여백을 잘라내는 설계라 **한 번도 걸리면 안 되는 값**이다.
+        _sh = open(os.path.join(ROOT, "src", "shots.py"), encoding="utf-8").read()
+        _mt = re.search(r"^TALL\s*=\s*(\d+)", _sh, re.M)
+        if not _mt:
+            _fb.append("shots.py 에서 TALL 을 못 읽었다")
+        elif int(_mt.group(1)) < _need * 3:
+            _fb.append(f"shots.py 의 TALL={_mt.group(1)} 이 {_n_rows}행에 비해 빠듯하다 "
+                       f"(여백 잘라내기 설계라 {_need * 3}px 이상이어야 한다)")
+ok(NAME("사다리 그림이 모든 행을 담고 있다(아래가 잘리지 않았다)"), not _fb, "; ".join(_fb))
 
 print()
 failed = 0

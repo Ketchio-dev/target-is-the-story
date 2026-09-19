@@ -8,8 +8,8 @@
 - [ ] 새 폴더에 클론해서 `python3 src/parse_reports.py && python3 src/parse_standards.py &&
       python3 src/analyze.py && python3 src/export_web.py` 가 **그대로 돈다**
       (데이터가 커밋돼 있어야 한다 — 원격이 죽어도 심사위원 손에서 돌아야 한다)
-- [ ] `python3 src/check.py` → **28/28**
-- [ ] `python3 src/sabotage.py` → **23/23 검출, 놓침 0**
+- [ ] `python3 src/check.py` → **34/34**
+- [ ] `python3 src/sabotage.py` → **29/29 검출, 놓침 0**
 - [ ] `web/index.html` 을 **더블클릭**해서 열린다 (서버 없이)
 - [ ] README 의 수치가 `analyze.py` 출력과 같다 (검사가 본다 — 손으로 확인할 필요 없다)
 

@@ -30,7 +30,8 @@ on 7,735 cases. Both at 100 %. Across 20 first-event standards the report uses
 counting from different days.
 
 **2. The average is evenly weighted across tribunals, not across cases.** The published roll-up
-is 92 % on 17,665 cases. Recomputing the same 7 component rows:
+is 92 % on 17,665 cases. Recomputing the same 8 component rows, evenly across the 7 tribunals
+they belong to:
 
 | | |
 |---|---:|
@@ -104,8 +105,8 @@ python3 src/parse_reports.py    # three annual reports -> data/kpi.json
 python3 src/parse_standards.py  # 2012 + 2013 standards -> data/standards.json
 python3 src/analyze.py          # every number quoted above
 python3 src/export_web.py       # web/index.html, opens from the filesystem, no server
-python3 src/check.py            # 31 checks, at a denominator that cannot shrink
-python3 src/sabotage.py         # break 26 things on purpose; do the checks notice?
+python3 src/check.py            # 34 checks, at a denominator that cannot shrink
+python3 src/sabotage.py         # break 29 things on purpose; do the checks notice?
 ```
 
 ## Sources

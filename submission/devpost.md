@@ -116,8 +116,8 @@ src/parse_reports.py    annual report tables -> kpi.json
 src/parse_standards.py  2012/2013/current service standards -> standards.json
 src/analyze.py          the ladder, the roll-up recomputation, the drift table
 src/export_web.py       injects data into web/page.html -> web/index.html
-src/check.py            28 checks, at a denominator that cannot shrink
-src/sabotage.py         breaks 23 things on purpose; do the checks notice?
+src/check.py            34 checks, at a denominator that cannot shrink
+src/sabotage.py         breaks 29 things on purpose; do the checks notice?
 ```
 
 The page opens from the filesystem. No server, no build step, no account.
@@ -168,6 +168,19 @@ was a true zero. That is the same conflation this project exists to point out.
   says how long anyone actually waited.
 - **The reconstruction is incomplete by +42 cases.** We do not know which rows the published
   roll-up averages. We print the residual instead of hiding it.
+
+## AI and tool disclosure
+
+LexHack requires this, and the full account is in `submission/ai-disclosure.md` in the
+repository. The short version: **most of the code and most of the prose here were drafted by a
+model** working under direction, including the parsers, the analysis, the check suite, the
+sabotage suite, and the Inspiration section above. The author supplied the direction, the
+decisions, and the one fact the Inspiration rests on.
+
+No figure was produced by a model. Every number comes from Tribunals Ontario's published
+documents through the parsers, and a check re-derives it from `analyze.py`'s output. The
+disclosure file also records where that binding was incomplete and what a pre-submission review
+caught because of it.
 
 ## Built with
 

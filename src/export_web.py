@@ -72,10 +72,12 @@ def main():
             continue
         per_year = {}
         for r in rel:
-            tot = sum(d["days"] for d in r["durations"] if d["days"])
+            # **`tot` 이라 부르면 안 된다.** 위에서 재구성 건수 합이 `tot` 이고,
+            # 이 루프가 그걸 덮어써서 페이지가 "210일"을 "재구성 건수"로 싣고 있었다.
+            days_sum = sum(d["days"] for d in r["durations"] if d["days"])
             y = r["source"].replace("std_", "")
-            if y not in per_year or tot > per_year[y]["days"]:
-                per_year[y] = {"days": tot, "sentence": r["sentence"],
+            if y not in per_year or days_sum > per_year[y]["days"]:
+                per_year[y] = {"days": days_sum, "sentence": r["sentence"],
                                "clock": clock_of(r["sentence"])}
         base = max(v["days"] for v in per_year.values())
         src = max(per_year.values(), key=lambda v: v["days"])

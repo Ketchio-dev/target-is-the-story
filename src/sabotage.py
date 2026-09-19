@@ -110,6 +110,15 @@ SABS = [
      "from rules import FIRST_EVENT, SCHEDULED, is_first_hearing",
      "from rules import FIRST_EVENT, SCHEDULED, is_first_hearing\nSCHEDULED = re.compile(r\"hearings? scheduled within\", re.I)",
      "첫 심리 판정 규칙이 한 벌이다"),
+    ("AI 고지의 검사 개수를 옛 값으로 되돌린다", "submission/ai-disclosure.md",
+     r"re:`check\.py` \(\d+ checks\)", "`check.py` (28 checks)",
+     "어느 문서도 검사·사보타주 개수를"),
+    ("화면 롤업 수치를 엉뚱한 변수로 덮는다", "src/export_web.py",
+     '"reconstructed_n": tot,', '"reconstructed_n": 210,',
+     "화면의 롤업 수치가 analyze 출력과"),
+    ("사다리 그림 높이를 옛 값으로 박아 둔다", "src/shots.py",
+     'TALL = 4000', 'TALL = 900',
+     "사다리 그림이 모든 행을 담고"),
 ]
 
 # 복원 목록은 **겨냥 대상에서 유도한다.** 손 목록이면 잔해가 남고, 그 잔해가 검사 실패처럼 보인다.
